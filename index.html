@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Piano generation demos</title>
+<style>
+body { font: 15px/1.5 system-ui, sans-serif; color: #202124; background: #f5f5f3; margin: 0; }
+main { max-width: 860px; margin: 0 auto; padding: 56px 24px; }
+h1 { font-size: 28px; margin: 0 0 8px; }
+.lede { color: #45484d; max-width: 66ch; margin: 0 0 28px; }
+a.card { display: block; background: #fff; border: 1px solid #e4e5e8; border-radius: 14px; padding: 18px 22px; margin: 14px 0;
+  color: inherit; text-decoration: none; box-shadow: 0 8px 26px rgb(27 31 36 / 7%); }
+a.card:hover { border-color: #b9c3e3; }
+a.card h3 { margin: 0 0 4px; font-size: 18px; }
+a.card p { margin: 0; color: #45484d; }
+a.card span { display: inline-block; margin-top: 10px; font-size: 13px; color: #74777d; }
+footer { margin-top: 32px; font-size: 12px; color: #74777d; }
+</style>
+<main>
+<h1>Unconditional piano generation: which latent to diffuse in</h1>
+<p class="lede">One diffusion model, three latent spaces. Each page shows eight 32 s samples from the final checkpoint,
+with audio and a piano roll.</p>
+<a class="card" href="backbone_64d/"><h3>Backbone feature, 64-d KL bottleneck</h3><p>The diffusion model generates 64-d latents of a KL-regularised bottleneck on the backbone's 768-d contextual feature. Latents are decoded to features, then to a piano roll by the reconstruction decoder.</p><span>100k steps &middot; Frechet 238.6</span></a>
+<a class="card" href="backbone_128d/"><h3>Backbone feature, 128-d KL bottleneck</h3><p>Same as the 64-d page with a 128-d bottleneck on the backbone's 768-d contextual feature.</p><span>100k steps &middot; Frechet 255.8</span></a>
+<a class="card" href="roll_vae_64d/"><h3>Piano-roll VAE, 64-d KL latent</h3><p>The same diffusion model on a 64-d KL latent of the piano roll itself (local encoder, no context), decoded by the VAE decoder.</p><span>125k steps &middot; Frechet 367.8</span></a>
+<footer>Audio rendered with the Salamander Grand Piano soundfont (Alexander Holm, CC BY 3.0).</footer>
+</main>
+</html>
